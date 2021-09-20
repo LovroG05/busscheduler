@@ -1,3 +1,4 @@
+from flask.json import jsonify
 import requests as req
 import time
 
@@ -20,7 +21,9 @@ class Line(object):
 
     def __postLineData(self, lineData):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_linija_info_0.php"
-        response = req.post(url, data=lineData)
+        obj = {"flags": lineData}
+        response = req.post(url, data=obj)
+        print(f"POSTLINADATA: %i" % response.status_code)
         return response.text
 
     def getTime(self, _time):
@@ -41,6 +44,39 @@ class Line(object):
     def getArrivalTime(self):
         return self.arrivalTime
 
+    def serialize(self):
+        return {
+            "vozniRed": self.vozniRed,
+            "startTime": self.startTime,
+            "arrivalTime": self.arrivalTime,
+            "lineInfo": self.lineInfo
+        }
+
+class Misc():
+    def serializeBusStations(self, stations):
+        serializedStations = []
+        for station in stations:
+            if station != "":
+                station = station.split(":")
+                station = station[1]
+                station = station.split("|")
+                station_id = station[0]
+                station_name = station[1]
+                station_obj = {"lineId": station_id, "lineName": station_name}
+                serializedStations.append(station_obj)
+
+        return jsonify(serializedStations)
+
+
+    def getBusStations(self):
+        url = "https://www.ap-ljubljana.si/_vozni_red/get_postajalisca_vsa_v2.php"
+        response = req.get(url)
+        text = response.text
+        stations = text.split("\n")
+        serializedStations = self.serializeBusStations(stations)
+        return serializedStations
+
+
 class BusGetter():
     def __init__(self, vstopId, izstopId, date):
         self.vstopId = vstopId
@@ -48,6 +84,6 @@ class BusGetter():
         self.date = date
 
     def getVozniRed(self):
-        url = "https://www.ap-ljubljana.si/_vozni_red/get_vozni_red_0.php?VSTOP_ID=" + self.vstopId + "&IZSTOP_ID=" + self.izstopId + "&DATUM=" + self.date
+        url = "https://www.ap-ljubljana.si/_vozni_red/get_vozni_red_0.php?VSTOP_ID=" + str(self.vstopId) + "&IZSTOP_ID=" + str(self.izstopId) + "&DATUM=" + str(self.date)
         response = req.get(url)
         return response.text
