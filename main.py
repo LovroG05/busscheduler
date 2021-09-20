@@ -80,4 +80,4 @@ def api_get_stations():
     stations = misc.getBusStations()
     return stations
 
-app.run()
+app.run('0.0.0.0', port=5000)
