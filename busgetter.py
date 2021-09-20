@@ -1,4 +1,5 @@
 import requests as req
+import time
 
 
 class Line(object):
@@ -14,8 +15,6 @@ class Line(object):
         data = line.split("|")
         lineData = data[-1]
 
-        print("data: " + str(lineData))
-
         if lineData != "":
             return lineData
 
@@ -24,10 +23,16 @@ class Line(object):
         response = req.post(url, data=lineData)
         return response.text
 
+    def getTime(self, _time):
+        obj = time.strptime(_time, "%Y-%m-%d %H:%M:%S")
+
+        return obj
+    
+
     def makeTimeData(self, text):
         dataList = text.split("|")
-        startTime = dataList[6]
-        arrivalTime = dataList[7]
+        startTime = self.getTime(dataList[6])
+        arrivalTime = self.getTime(dataList[7])
         return startTime, arrivalTime
 
     def getStartTime(self):
