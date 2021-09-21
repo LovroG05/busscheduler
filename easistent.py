@@ -17,7 +17,7 @@ class EasistentAuth():
         login = s.post("https://www.easistent.com/p/ajax_prijava", data = loginData)
 
         if json.loads(login.text)["status"] != "ok":
-            return "Napačno uporabniško ime ali geslo! Poskusite znova!"
+            return "Napačno uporabniško ime ali geslo! Poskusite znova!", ""
 
         else:
             src = s.get("https://www.easistent.com").text
@@ -48,7 +48,8 @@ class EasistentClient():
         }
 
     def getSchedule(self):
-        r = self.session.get("https://www.easistent.com/m/timetable/weekly", headers = self.headers)
+        params = {"from": "2021-09-20", "to": "2021-09-24"}
+        r = self.session.get("https://www.easistent.com/m/timetable/weekly", headers=self.headers, params=params)
         try:
             if json.loads(r.text)["error"]:
                 return "Invalid token/child id"
@@ -58,9 +59,9 @@ class EasistentClient():
 
 
 
-""" # TEMPORARY CODE
+# TEMPORARY CODE
 
-if __name__ == "__main__":
+""" if __name__ == "__main__":
     load_dotenv()
     USERNAME = os.getenv("USRNAME")
     PASSWORD = os.getenv("PASSWD")
@@ -73,4 +74,3 @@ if __name__ == "__main__":
 
     eC = EasistentClient(access_token, child_id)
     print(eC.getSchedule()) """
-

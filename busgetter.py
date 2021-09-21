@@ -23,7 +23,6 @@ class Line(object):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_linija_info_0.php"
         obj = {"flags": lineData}
         response = req.post(url, data=obj)
-        print(f"POSTLINADATA: %i" % response.status_code)
         return response.text
 
     def getTime(self, _time):

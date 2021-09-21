@@ -1,0 +1,424 @@
+[
+    {"time": {"from_id": 241008, "to_id": 241008, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160088, "color": "#3c9d61", "subject": {"id": "5472726", "name": "MAT"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25047", "name": "Damijan Purg"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241008, "to_id": 241008, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67114416, "color": "#3182ad", "subject": {"id": "5471910", "name": "LAV"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800829", "name": "108"
+        }, "teachers": [
+            {"id": "25034", "name": "Anton Orehek"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241008, "to_id": 241008, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67173117, "color": "#3182ad", "subject": {"id": "5471910", "name": "LAV"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800949", "name": "K3"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241026, "to_id": 241026, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160130, "color": "#3c9d61", "subject": {"id": "5472726", "name": "MAT"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25047", "name": "Damijan Purg"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241026, "to_id": 241026, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67173207, "color": "#3182ad", "subject": {"id": "5471910", "name": "LAV"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800949", "name": "K3"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241026, "to_id": 241026, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160577, "color": "#9847b2", "subject": {"id": "5471907", "name": "RAČ"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241029, "to_id": 241029, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160667, "color": "#52cd87", "subject": {"id": "5472765", "name": "ZGO"
+        }, "completed": True, "hour_special_type": "substitution", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "21499", "name": "Merlin Gulan Lokar"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241029, "to_id": 241029, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160172, "color": "#3c9d61", "subject": {"id": "5472726", "name": "MAT"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25047", "name": "Damijan Purg"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241029, "to_id": 241029, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160622, "color": "#9847b2", "subject": {"id": "5471907", "name": "RAČ"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241032, "to_id": 241032, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160724, "color": "#c260bd", "subject": {"id": "5472711", "name": "FIZ"
+        }, "completed": True, "hour_special_type": "substitution", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25009", "name": "Andrej Guštin"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241032, "to_id": 241032, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160217, "color": "#3c9d61", "subject": {"id": "5472726", "name": "MAT"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25047", "name": "Damijan Purg"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241032, "to_id": 241032, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160442, "color": "#b78e33", "subject": {"id": "5472753", "name": "SLO"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25057", "name": "Marjeta Šušteršič Menart"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241035, "to_id": 241035, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160946, "color": "#bd4043", "subject": {"id": "5472777", "name": "NEM2"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25070", "name": "Sonja Zver"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241035, "to_id": 241035, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160352, "color": "#b78e33", "subject": {"id": "5472753", "name": "SLO"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25057", "name": "Marjeta Šušteršič Menart"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241035, "to_id": 241035, "date": "2021-09-23"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67162593, "color": "#c260bd", "subject": {"id": "5472711", "name": "FIZ"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800880", "name": "207A"
+        }, "teachers": [
+            {"id": "25051", "name": "Rastislav Snoj"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241035, "to_id": 241035, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160532, "color": "#b78e33", "subject": {"id": "5472753", "name": "SLO"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25057", "name": "Marjeta Šušteršič Menart"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241038, "to_id": 241038, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160880, "color": "#3cb13d", "subject": {"id": "5472744", "name": "RUR"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25070", "name": "Sonja Zver"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241038, "to_id": 241038, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67162149, "color": "#386dab", "subject": {"id": "5472870", "name": "BIOv"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800880", "name": "207A"
+        }, "teachers": [
+            {"id": "25019", "name": "Sonja Krapež"
+            }
+        ], "groups": [
+            {"id": "2540433", "name": "Skupina 1"
+            }
+        ], "info": []
+    },
+    {"time": {"from_id": 241038, "to_id": 241038, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160397, "color": "#b78e33", "subject": {"id": "5472753", "name": "SLO"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25057", "name": "Marjeta Šušteršič Menart"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241038, "to_id": 241038, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160988, "color": "#bd4043", "subject": {"id": "5472777", "name": "NEM2"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25070", "name": "Sonja Zver"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241041, "to_id": 241041, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67152408, "color": "#c64e46", "subject": {"id": "5472837", "name": "KEM"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800904", "name": "216"
+        }, "teachers": [
+            {"id": "25020", "name": "Aleksandra Saška Kučan"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241041, "to_id": 241041, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67186605, "color": "#386dab", "subject": {"id": "5472870", "name": "BIOv"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800880", "name": "207A"
+        }, "teachers": [
+            {"id": "25019", "name": "Sonja Krapež"
+            }
+        ], "groups": [
+            {"id": "2540433", "name": "Skupina 1"
+            }
+        ], "info": []
+    },
+    {"time": {"from_id": 241041, "to_id": 241041, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160796, "color": "#aa4048", "subject": {"id": "5472738", "name": "ANG1"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "5838", "name": "Amanda Zupanc"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241041, "to_id": 241041, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67161033, "color": "#bd4043", "subject": {"id": "5472777", "name": "NEM2"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25070", "name": "Sonja Zver"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241044, "to_id": 241044, "date": "2021-09-20"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67152450, "color": "#c64e46", "subject": {"id": "5472837", "name": "KEM"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800904", "name": "216"
+        }, "teachers": [
+            {"id": "25020", "name": "Aleksandra Saška Kučan"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241044, "to_id": 241044, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67162104, "color": "#a631a2", "subject": {"id": "5472750", "name": "BIO"
+        }, "completed": True, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800880", "name": "207A"
+        }, "teachers": [
+            {"id": "25019", "name": "Sonja Krapež"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241044, "to_id": 241044, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67179918, "color": "#3182ad", "subject": {"id": "5471910", "name": "LAV"
+        }, "completed": False, "hour_special_type": "substitution", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800847", "name": "116"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241044, "to_id": 241044, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67103877, "color": "#c85c8b", "subject": {"id": "5472888", "name": "TV3"
+        }, "completed": True, "hour_special_type": "cancelled", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800931", "name": "8"
+        }, "teachers": [
+            {"id": "2521392", "name": "Zlatko Vučenović"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241047, "to_id": 241047, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67159818, "color": "#43a67c", "subject": {"id": "5472807", "name": "PSI"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "698224", "name": "Maja Pezdir"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241047, "to_id": 241047, "date": "2021-09-22"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67179963, "color": "#3182ad", "subject": {"id": "5471910", "name": "LAV"
+        }, "completed": False, "hour_special_type": "substitution", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800847", "name": "116"
+        }, "teachers": [
+            {"id": "67748", "name": "Aleš Volčini"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241047, "to_id": 241047, "date": "2021-09-24"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67103922, "color": "#c85c8b", "subject": {"id": "5472888", "name": "TV3"
+        }, "completed": True, "hour_special_type": "cancelled", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800931", "name": "8"
+        }, "teachers": [
+            {"id": "2521392", "name": "Zlatko Vučenović"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241011, "to_id": 241011, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67159863, "color": "#43a67c", "subject": {"id": "5472807", "name": "PSI"
+        }, "completed": False, "hour_special_type": None, "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "698224", "name": "Maja Pezdir"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241014, "to_id": 241014, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160262, "color": "#38aaa1", "subject": {"id": "5472831", "name": "GEO"
+        }, "completed": True, "hour_special_type": "cancelled", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25075", "name": "Slavica Škerbot"
+            }
+        ], "groups": [], "info": []
+    },
+    {"time": {"from_id": 241017, "to_id": 241017, "date": "2021-09-21"
+        }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+        }, "event_id": 67160307, "color": "#38aaa1", "subject": {"id": "5472831", "name": "GEO"
+        }, "completed": True, "hour_special_type": "cancelled", "departments": [
+            {"id": "457818", "name": "G2A"
+            }
+        ], "classroom": {"id": "800919", "name": "222"
+        }, "teachers": [
+            {"id": "25075", "name": "Slavica Škerbot"
+            }
+        ], "groups": [], "info": []
+    }
+], "events": [
+    {"id": 23494260, "date": "2021-09-23", "time": {"from": "07: 30", "to": "10: 45"
+        }, "location": {"name": "207", "short_name": None
+        }, "teachers": [
+            {"id": "25020", "name": "Aleksandra Saška Kučan"
+            }
+        ], "name": "OIV - PD", "event_type": 6
+    }
+]

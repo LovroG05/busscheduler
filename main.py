@@ -3,16 +3,90 @@ from busgetter import BusGetter, Line, Misc
 import time
 import datetime
 from flask import Flask, jsonify, request
+import easistent
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 WEEKDAY_TABLE = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"]
 
+HOUR_ID_TABLE = {
+                1: 241008, 
+                2: 241026, 
+                3: 241029, 
+                4: 241032, 
+                "malca1": 241147, 
+                5: 241035, 
+                6: 241038, 
+                7: 241041, 
+                8: 241044, 
+                "malca2": 241047, 
+                9: 241247, 
+                10: 241011, 
+                11: 241014, 
+                12: 241017, 
+                13: 241020, 
+                14: 241023}
+
+TIME_TABLE = {
+        241008 : {"from": "07: 30", "to": "08: 15"}, 
+        241026: {"from": "08: 20", "to": "09: 05"}, 
+        241029: {"from": "09: 10", "to": "09: 55"},
+        241032: {"from": "10: 00", "to": "10: 45"}, 
+        241147: {"from": "10: 45", "to": "11: 05"}, 
+        241035: {"from": "11: 05", "to": "11: 50"},
+        241038: {"from": "11: 55", "to": "12: 40"},
+        241041: {"from": "12: 45", "to": "13: 30"}, 
+        241044: {"from": "13: 35", "to": "14: 20"}, 
+        241047: {"from": "14: 25", "to": "15: 10"},
+        241247: {"from": "15: 10", "to": "15: 30"}, 
+        241011: {"from": "15: 30", "to": "16: 15"}, 
+        241014: {"from": "16: 20", "to": "17: 05"}, 
+        241017: {"from": "17: 10", "to": "17: 55"}, 
+        241020: {"from": "18: 00", "to": "18: 45"}, 
+        241023: {"from": "18: 50", "to": "19: 35"}
+    }
+
+TIME_MARGIN = datetime.timedelta(minutes=20)
+USRNAME = os.getenv("USRNAME")
+PASSWD = os.getenv("PASSWD")
 
 app = Flask(__name__)
 
+def getLatestArrival(date):
+    eAuth = easistent.EasistentAuth(USRNAME, PASSWD)
+    access_token, child_id = eAuth.getNewToken()
+
+    eClient = easistent.EasistentClient(access_token, child_id)
+    schedule = eClient.getSchedule()
+
+    schoolHourEvents = schedule["school_hour_events"]
+
+    hoursOnDate = []
+    for hour in schoolHourEvents:
+        if hour["time"]["date"] == date:
+            hoursOnDate.append(hour)
+
+    startTimeStr = hoursOnDate[0]["time"]["from_id"]
+
+
+     
+    """ 
+    print(f"starting time: {startTimeStr}")
+    todayDatetime = datetime.datetime.now()
+    todayStr = todayDatetime.strftime("%Y-%m-%d")
+    tStr = todayStr + " " + startTimeStr + ":00"
+    startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
+    startTime = startTime - TIME_MARGIN
+    print(f"latest arrival time: {startTime}")
+    return startTime """
+
+
+
 @app.route("/api/v1/getlines", methods=["GET"])
 def api_get_lines():
-    # args: start_station, end_station, date, latest_arrival
+    # args: start_station, end_station, date
     if "start_station" in request.args:
         START_STATION_ID = int(request.args["start_station"])
     else:
@@ -25,13 +99,11 @@ def api_get_lines():
         DATE = request.args["date"]
     else:
         DATE = datetime.datetime.now().strftime("%Y-%m-%d")
-    if "latest_arrival" in request.args:
-        LATEST_ARRIVAL_TIME = request.args["latest_arrival"]
-    else: 
-        LATEST_ARRIVAL_TIME = DATE + "23:59:59"
 
-    LATEST_ARRIVAL_TIME_OBJ = time.strptime(LATEST_ARRIVAL_TIME, "%Y-%m-%d %H:%M:%S")
-    WEEKDAY = LATEST_ARRIVAL_TIME_OBJ[6]
+    LATEST_ARRIVAL_TIME_OBJ = getLatestArrival(DATE)
+    LATEST_ARRIVAL_TIME = LATEST_ARRIVAL_TIME_OBJ.strftime("%H:%M")
+    
+    WEEKDAY = LATEST_ARRIVAL_TIME_OBJ.today().weekday()
 
     Bus = BusGetter(START_STATION_ID, END_STATION_ID, DATE)
     vozniRed = Bus.getVozniRed()
@@ -80,4 +152,4 @@ def api_get_stations():
     stations = misc.getBusStations()
     return stations
 
-app.run('0.0.0.0', port=5000)
+app.run()
