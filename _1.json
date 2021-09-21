@@ -1,0 +1,145 @@
+{"time_table": [
+        {"id": 241008, "name": "1", "name_short": "1", "time": {"from": "07: 30", "to": "08: 15"
+            }, "type": "default"
+        },
+        {"id": 241026, "name": "2", "name_short": "2", "time": {"from": "08: 20", "to": "09: 05"
+            }, "type": "default"
+        },
+        {"id": 241029, "name": "3", "name_short": "3", "time": {"from": "09: 10", "to": "09: 55"
+            }, "type": "default"
+        },
+        {"id": 241032, "name": "4", "name_short": "4", "time": {"from": "10: 00", "to": "10: 45"
+            }, "type": "default"
+        },
+        {"id": 241147, "name": "", "name_short": "", "time": {"from": "10: 45", "to": "11: 05"
+            }, "type": "break"
+        },
+        {"id": 241035, "name": "5", "name_short": "5", "time": {"from": "11: 05", "to": "11: 50"
+            }, "type": "default"
+        },
+        {"id": 241038, "name": "6", "name_short": "6", "time": {"from": "11: 55", "to": "12: 40"
+            }, "type": "default"
+        },
+        {"id": 241041, "name": "7", "name_short": "7", "time": {"from": "12: 45", "to": "13: 30"
+            }, "type": "default"
+        },
+        {"id": 241044, "name": "8", "name_short": "8", "time": {"from": "13: 35", "to": "14: 20"
+            }, "type": "default"
+        },
+        {"id": 241047, "name": "9", "name_short": "9", "time": {"from": "14: 25", "to": "15: 10"
+            }, "type": "default"
+        },
+        {"id": 241247, "name": "", "name_short": "", "time": {"from": "15: 10", "to": "15: 30"
+            }, "type": "break"
+        },
+        {"id": 241011, "name": "10", "name_short": "10", "time": {"from": "15: 30", "to": "16: 15"
+            }, "type": "default"
+        },
+        {"id": 241014, "name": "11", "name_short": "11", "time": {"from": "16: 20", "to": "17: 05"
+            }, "type": "default"
+        },
+        {"id": 241017, "name": "12", "name_short": "12", "time": {"from": "17: 10", "to": "17: 55"
+            }, "type": "default"
+        },
+        {"id": 241020, "name": "13", "name_short": "13", "time": {"from": "18: 00", "to": "18: 45"
+            }, "type": "default"
+        },
+        {"id": 241023, "name": "14", "name_short": "14", "time": {"from": "18: 50", "to": "19: 35"
+            }, "type": "default"
+        }
+    ], "day_table": [
+        {"name": "Torek", "short_name": "T", "date": "2021-09-21"
+        }
+    ], "school_hour_events": [
+        {"time": {"from_id": 241038, "to_id": 241038, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67162149, "color": "#386dab", "subject": {"id": "5472870", "name": "BIOv"
+            }, "completed": True, "hour_special_type": None, "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800880", "name": "207A"
+            }, "teachers": [
+                {"id": "25019", "name": "Sonja Krapež"
+                }
+            ], "groups": [
+                {"id": "2540433", "name": "Skupina 1"
+                }
+            ], "info": []
+        },
+        {"time": {"from_id": 241041, "to_id": 241041, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67186605, "color": "#386dab", "subject": {"id": "5472870", "name": "BIOv"
+            }, "completed": True, "hour_special_type": None, "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800880", "name": "207A"
+            }, "teachers": [
+                {"id": "25019", "name": "Sonja Krapež"
+                }
+            ], "groups": [
+                {"id": "2540433", "name": "Skupina 1"
+                }
+            ], "info": []
+        },
+        {"time": {"from_id": 241044, "to_id": 241044, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67162104, "color": "#a631a2", "subject": {"id": "5472750", "name": "BIO"
+            }, "completed": True, "hour_special_type": None, "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800880", "name": "207A"
+            }, "teachers": [
+                {"id": "25019", "name": "Sonja Krapež"
+                }
+            ], "groups": [], "info": []
+        },
+        {"time": {"from_id": 241047, "to_id": 241047, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67159818, "color": "#43a67c", "subject": {"id": "5472807", "name": "PSI"
+            }, "completed": False, "hour_special_type": None, "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800919", "name": "222"
+            }, "teachers": [
+                {"id": "698224", "name": "Maja Pezdir"
+                }
+            ], "groups": [], "info": []
+        },
+        {"time": {"from_id": 241011, "to_id": 241011, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67159863, "color": "#43a67c", "subject": {"id": "5472807", "name": "PSI"
+            }, "completed": False, "hour_special_type": None, "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800919", "name": "222"
+            }, "teachers": [
+                {"id": "698224", "name": "Maja Pezdir"
+                }
+            ], "groups": [], "info": []
+        },
+        {"time": {"from_id": 241014, "to_id": 241014, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67160262, "color": "#38aaa1", "subject": {"id": "5472831", "name": "GEO"
+            }, "completed": True, "hour_special_type": "cancelled", "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800919", "name": "222"
+            }, "teachers": [
+                {"id": "25075", "name": "Slavica Škerbot"
+                }
+            ], "groups": [], "info": []
+        },
+        {"time": {"from_id": 241017, "to_id": 241017, "date": "2021-09-21"
+            }, "videokonferenca": {"id": None, "link": None, "zacetek": None, "opomba": None
+            }, "event_id": 67160307, "color": "#38aaa1", "subject": {"id": "5472831", "name": "GEO"
+            }, "completed": True, "hour_special_type": "cancelled", "departments": [
+                {"id": "457818", "name": "G2A"
+                }
+            ], "classroom": {"id": "800919", "name": "222"
+            }, "teachers": [
+                {"id": "25075", "name": "Slavica Škerbot"
+                }
+            ], "groups": [], "info": []
+        }
+    ], "events": [], "all_day_events": []
+}
