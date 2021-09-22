@@ -154,11 +154,28 @@ def getLatestArrival(date, dir, timeMargin):
     print(f"latest arrival time: {startTime}")
     return startTime 
 
+def getArrivalTimeNoMargin(date, dir):
+    if dir == "to_school":
+        timeStr = getStartTime(date)
+    elif dir == "from_school":
+        timeStr = getEndTime(date)
+    else:
+        return "ERROR invalid direction"
 
+    todayStr = date
+    tStr = todayStr + " " + timeStr + ":00"
+    startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
+    return startTime 
+
+def getEarlyArrival(date, dir, timeMargin):
+    startTime = getArrivalTimeNoMargin(date, dir)
+    startTime = startTime - timeMargin
+    print(f"earliest arrival time: %s" % startTime.strftime("%Y-%m-%d %H:%M:%S"))
+    return startTime
 
 @app.route("/api/v1/getlines", methods=["GET"])
 def api_get_lines():
-    # args: start_station, end_station, date, dir, time margin, 
+    # args: start_station, end_station, date, dir, time_margin, early_time_margin
     if "start_station" in request.args:
         START_STATION_ID = int(request.args["start_station"])
     else:
@@ -179,9 +196,16 @@ def api_get_lines():
         TIME_MARGIN = datetime.timedelta(minutes=int(request.args["time_margin"]))
     else:
         TIME_MARGIN = datetime.timedelta(minutes=20)
+    if "early_time_margin" in request.args:
+        EARLY_TIME_MARGIN = datetime.timedelta(minutes=int(request.args["early_time_margin"]))
+    else:
+        EARLY_TIME_MARGIN = datetime.timedelta(minutes=40)
 
     LATEST_ARRIVAL_TIME_OBJ = getLatestArrival(DATE, DIR, TIME_MARGIN)
     LATEST_ARRIVAL_TIME = LATEST_ARRIVAL_TIME_OBJ.strftime("%H:%M")
+    
+    EARLY_ARRIVAL_TIME_OBJ = getEarlyArrival(DATE, DIR, EARLY_TIME_MARGIN)
+    EARLY_ARRIVAL_TIME = EARLY_ARRIVAL_TIME_OBJ.strftime("%H:%M")
     
     """  WEEKDAY = LATEST_ARRIVAL_TIME_OBJ.today().weekday() """
 
@@ -197,36 +221,46 @@ def api_get_lines():
 
     
     # get lines that havent already passed
-    validStartLinesList = []
+    validStartLinesList1 = []
     for i in linesList:
         startTime = time.mktime(i.getStartTime())
         timenow2 = time.time()
         seconds = startTime - timenow2
         if seconds > 0:
-            validStartLinesList.append(i)
+            validStartLinesList1.append(i)
 
-    """ print(validStartLinesList) """
+    """ print(validStartLinesList1) """
 
 
     # get lines that arrive in time
-    fullyValidLinesList = []
-    for i in validStartLinesList:
+    validStartLinesList2 = []
+    for i in validStartLinesList1:
         arrivalTime = time.mktime(i.getArrivalTime())
         """ print(f"arrival time: %s" % time.strftime("%Y-%m-%d %H:%M:%S", i.getStartTime())) """
         latestArrival = time.mktime(LATEST_ARRIVAL_TIME_OBJ.timetuple())
         seconds = latestArrival - arrivalTime
         if seconds > 0:
-            fullyValidLinesList.append(i)
+            validStartLinesList2.append(i)
+
+    # get lines that dont arrive to early
+    validStartLinesList3 = []
+    for i in validStartLinesList2:
+        arrivalTime = time.mktime(i.getArrivalTime())
+        earlyArrival = time.mktime(EARLY_ARRIVAL_TIME_OBJ.timetuple())
+        seconds = arrivalTime - earlyArrival
+        if seconds > 0:
+            validStartLinesList3.append(i)
 
 
 
-    print("VALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME)
-    for line in fullyValidLinesList:
+    print("\nVALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME)
+    for line in validStartLinesList3:
         print(f"LINE START: %s\nLINE END: %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", line.getStartTime()), time.strftime("%Y-%m-%d %H:%M:%S", line.getArrivalTime())))
+    
 
+    # serialize lines to json
     serializedLines = []
-
-    for i in fullyValidLinesList:
+    for i in validStartLinesList3:
         serializedLines.append(i.serialize())
 
     return jsonify({"lines": serializedLines})

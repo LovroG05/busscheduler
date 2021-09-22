@@ -56,21 +56,3 @@ class EasistentClient():
 
         except:
             return json.loads(r.text)
-
-
-
-# TEMPORARY CODE
-
-""" if __name__ == "__main__":
-    load_dotenv()
-    USERNAME = os.getenv("USRNAME")
-    PASSWORD = os.getenv("PASSWD")
-    eA = EasistentAuth(USERNAME, PASSWORD)
-    
-    access_token, child_id = eA.getNewToken()
-
-    print(access_token)
-    print(child_id)
-
-    eC = EasistentClient(access_token, child_id)
-    print(eC.getSchedule()) """

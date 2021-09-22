@@ -10,9 +10,6 @@ class Line(object):
         self.lineInfo = self.__postLineData(self.__curateLineData(self.vozniRed))
 
     def __curateLineData(self, line):
-        # example input:
-        # 0|1632108000|1|LJUBLJANA AVTOBUSNA POSTAJA|788|Logatec Krpan|2021-09-20 05:20:00|2021-09-20
-        # 06:07:00|0:47|3.60|999|0|1|2138;57629;33413;1;1;788;22;2021-09-20 05:20:00;3.60
         data = line.split("|")
         lineData = data[-1]
 
