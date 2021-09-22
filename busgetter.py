@@ -24,7 +24,6 @@ class Line(object):
 
     def getTime(self, _time):
         obj = time.strptime(_time, "%Y-%m-%d %H:%M:%S")
-
         return obj
     
 
@@ -71,6 +70,18 @@ class Misc():
         stations = text.split("\n")
         serializedStations = self.serializeBusStations(stations)
         return serializedStations
+
+    def serializeStations(self, stations):
+        serializedStations = []
+        lines = stations.split("\n")
+        for line in lines:
+            line = line.split("|")
+            line_id = line[0].split(":")[1]
+            line_name = line[1]
+            serializedStations.append({"lineId": line_id, "lineName": line_name})
+
+        return jsonify(serializedStations)
+        
 
 
 class BusGetter():
