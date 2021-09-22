@@ -6,55 +6,78 @@ from flask import Flask, jsonify, request
 import easistent
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
 WEEKDAY_TABLE = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"]
 
 HOUR_ID_TABLE = {
-                1: 241008, 
-                2: 241026, 
-                3: 241029, 
-                4: 241032, 
-                "malca1": 241147, 
-                5: 241035, 
-                6: 241038, 
-                7: 241041, 
-                8: 241044, 
-                "malca2": 241047, 
-                9: 241247, 
-                10: 241011, 
-                11: 241014, 
-                12: 241017, 
-                13: 241020, 
-                14: 241023}
+    1: 241008, 
+    2: 241026, 
+    3: 241029, 
+    4: 241032, 
+    "malca1": 241147, 
+    5: 241035, 
+    6: 241038, 
+    7: 241041, 
+    8: 241044, 
+    "malca2": 241047, 
+    9: 241247, 
+    10: 241011, 
+    11: 241014, 
+    12: 241017, 
+    13: 241020, 
+    14: 241023
+}
 
 TIME_TABLE = {
-        241008 : {"from": "07: 30", "to": "08: 15"}, 
-        241026: {"from": "08: 20", "to": "09: 05"}, 
-        241029: {"from": "09: 10", "to": "09: 55"},
-        241032: {"from": "10: 00", "to": "10: 45"}, 
-        241147: {"from": "10: 45", "to": "11: 05"}, 
-        241035: {"from": "11: 05", "to": "11: 50"},
-        241038: {"from": "11: 55", "to": "12: 40"},
-        241041: {"from": "12: 45", "to": "13: 30"}, 
-        241044: {"from": "13: 35", "to": "14: 20"}, 
-        241047: {"from": "14: 25", "to": "15: 10"},
-        241247: {"from": "15: 10", "to": "15: 30"}, 
-        241011: {"from": "15: 30", "to": "16: 15"}, 
-        241014: {"from": "16: 20", "to": "17: 05"}, 
-        241017: {"from": "17: 10", "to": "17: 55"}, 
-        241020: {"from": "18: 00", "to": "18: 45"}, 
-        241023: {"from": "18: 50", "to": "19: 35"}
-    }
+    241008: {"from": "07:30", "to": "08:15"}, 
+    241026: {"from": "08:20", "to": "09:05"}, 
+    241029: {"from": "09:10", "to": "09:55"},
+    241032: {"from": "10:00", "to": "10:45"}, 
+    241147: {"from": "10:45", "to": "11:05"}, 
+    241035: {"from": "11:05", "to": "11:50"},
+    241038: {"from": "11:55", "to": "12:40"},
+    241041: {"from": "12:45", "to": "13:30"}, 
+    241044: {"from": "13:35", "to": "14:20"}, 
+    241047: {"from": "14:25", "to": "15:10"},
+    241247: {"from": "15:10", "to": "15:30"}, 
+    241011: {"from": "15:30", "to": "16:15"}, 
+    241014: {"from": "16:20", "to": "17:05"}, 
+    241017: {"from": "17:10", "to": "17:55"}, 
+    241020: {"from": "18:00", "to": "18:45"},
+    241023: {"from": "18:50", "to": "19:35"}
+}
 
-TIME_MARGIN = datetime.timedelta(minutes=20)
+
 USRNAME = os.getenv("USRNAME")
 PASSWD = os.getenv("PASSWD")
 
 app = Flask(__name__)
 
-def getLatestArrival(date):
+def modEventTime(time):
+    # removes space from time
+    time = time.split(" ")
+    return time[0]
+
+def getFromAndToId(_time):
+    # returns from_id and to_id from TIME_TABLE by start time of event
+    from_time = _time["from"]
+    to_time = _time["to"]
+    from_time = modEventTime(from_time)
+    to_time = modEventTime(to_time)
+
+    new_to_time = datetime.datetime.strptime(from_time, "%H:%M") + datetime.timedelta(minutes=45)
+    new_from_time = datetime.datetime.strptime(to_time, "%H:%M") - datetime.timedelta(minutes=45)
+
+    from_id = list(TIME_TABLE.keys())[list(TIME_TABLE.values()).index({"from": from_time, "to": new_to_time.strftime("%H:%M")})]
+    to_id = list(TIME_TABLE.keys())[list(TIME_TABLE.values()).index({"from": new_from_time.strftime("%H:%M"), "to": to_time})]
+
+    return from_id, to_id
+
+def getStartTime(date):
+    # returns start time of school from TIME_TABLE
     eAuth = easistent.EasistentAuth(USRNAME, PASSWD)
     access_token, child_id = eAuth.getNewToken()
 
@@ -62,31 +85,80 @@ def getLatestArrival(date):
     schedule = eClient.getSchedule()
 
     schoolHourEvents = schedule["school_hour_events"]
+    events = []
+    if schedule["events"] != []:
+        events =schedule["events"]
+        for event in events:
+            """ event = json.loads(event) """
+            idFrom, idTo = getFromAndToId(event["time"])
+            event["time"] = {"from_id": idFrom, "to_id": idTo, "date": event["date"]}
+
+            schoolHourEvents.append(event)
+
+    schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
 
     hoursOnDate = []
     for hour in schoolHourEvents:
         if hour["time"]["date"] == date:
             hoursOnDate.append(hour)
 
-    startTimeStr = hoursOnDate[0]["time"]["from_id"]
+    startTimeId = hoursOnDate[0]["time"]["from_id"]
+    startTimeStr = TIME_TABLE[startTimeId]["from"]
 
+    return startTimeStr
 
-     
-    """ 
-    print(f"starting time: {startTimeStr}")
-    todayDatetime = datetime.datetime.now()
-    todayStr = todayDatetime.strftime("%Y-%m-%d")
-    tStr = todayStr + " " + startTimeStr + ":00"
+def getEndTime(date):
+    # returns end time of school from TIME_TABLE
+    eAuth = easistent.EasistentAuth(USRNAME, PASSWD)
+    access_token, child_id = eAuth.getNewToken()
+
+    eClient = easistent.EasistentClient(access_token, child_id)
+    schedule = eClient.getSchedule()
+
+    schoolHourEvents = schedule["school_hour_events"]
+    events = []
+    if schedule["events"] != []:
+        events =schedule["events"]
+        for event in events:
+            """ event = json.loads(event) """
+            idFrom, idTo = getFromAndToId(event["time"])
+            event["time"] = {"from_id": idFrom, "to_id": idTo, "date": event["date"]}
+
+            schoolHourEvents.append(event)
+
+    schoolHourEvents.sort(key=lambda x: x["time"]["from_id"], reverse=True)
+
+    hoursOnDate = []
+    for hour in schoolHourEvents:
+        if hour["time"]["date"] == date:
+            hoursOnDate.append(hour)
+
+    endTimeId = hoursOnDate[-1]["time"]["to_id"]
+    endTimeStr = TIME_TABLE[endTimeId]["to"]
+
+    return endTimeStr
+
+def getLatestArrival(date, dir, timeMargin):
+    if dir == "to_school":
+        timeStr = getStartTime(date)
+    elif dir == "from_school":
+        timeStr = getEndTime(date)
+    else:
+        return "ERROR invalid direction"
+
+    print(f"starting/finish time: {timeStr}")
+    todayStr = date
+    tStr = todayStr + " " + timeStr + ":00"
     startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
-    startTime = startTime - TIME_MARGIN
+    startTime = startTime - timeMargin
     print(f"latest arrival time: {startTime}")
-    return startTime """
+    return startTime 
 
 
 
 @app.route("/api/v1/getlines", methods=["GET"])
 def api_get_lines():
-    # args: start_station, end_station, date
+    # args: start_station, end_station, date, dir, time margin, 
     if "start_station" in request.args:
         START_STATION_ID = int(request.args["start_station"])
     else:
@@ -99,23 +171,33 @@ def api_get_lines():
         DATE = request.args["date"]
     else:
         DATE = datetime.datetime.now().strftime("%Y-%m-%d")
+    if "dir" in request.args:
+        DIR = request.args["dir"]
+    else:
+        return "ERROR: no dir provided"
+    if "time_margin" in request.args:
+        TIME_MARGIN = datetime.timedelta(minutes=int(request.args["time_margin"]))
+    else:
+        TIME_MARGIN = datetime.timedelta(minutes=20)
 
-    LATEST_ARRIVAL_TIME_OBJ = getLatestArrival(DATE)
+    LATEST_ARRIVAL_TIME_OBJ = getLatestArrival(DATE, DIR, TIME_MARGIN)
     LATEST_ARRIVAL_TIME = LATEST_ARRIVAL_TIME_OBJ.strftime("%H:%M")
     
-    WEEKDAY = LATEST_ARRIVAL_TIME_OBJ.today().weekday()
+    """  WEEKDAY = LATEST_ARRIVAL_TIME_OBJ.today().weekday() """
 
     Bus = BusGetter(START_STATION_ID, END_STATION_ID, DATE)
     vozniRed = Bus.getVozniRed()
 
+    # vozni red to Line list
     vozniRed = vozniRed.split("\n")
     linesList = []
     for i in vozniRed:
         if i != "":
             linesList.append(Line(i))
 
+    
+    # get lines that havent already passed
     validStartLinesList = []
-
     for i in linesList:
         startTime = time.mktime(i.getStartTime())
         timenow2 = time.time()
@@ -123,14 +205,19 @@ def api_get_lines():
         if seconds > 0:
             validStartLinesList.append(i)
 
-    fullyValidLinesList = []
+    """ print(validStartLinesList) """
 
+
+    # get lines that arrive in time
+    fullyValidLinesList = []
     for i in validStartLinesList:
         arrivalTime = time.mktime(i.getArrivalTime())
-        latestArrival = time.mktime(time.strptime(LATEST_ARRIVAL_TIME,  "%Y-%m-%d %H:%M:%S"))
+        """ print(f"arrival time: %s" % time.strftime("%Y-%m-%d %H:%M:%S", i.getStartTime())) """
+        latestArrival = time.mktime(LATEST_ARRIVAL_TIME_OBJ.timetuple())
         seconds = latestArrival - arrivalTime
         if seconds > 0:
             fullyValidLinesList.append(i)
+
 
 
     print("VALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME)
