@@ -34,9 +34,6 @@ HOUR_ID_TABLE = {
  """
 
 
-USRNAME = os.getenv("USRNAME")
-PASSWD = os.getenv("PASSWD")
-
 app = Flask(__name__)
 
 # http GET request for getting bus lines for going TO school
@@ -63,6 +60,14 @@ def api_get_lines_to():
         EARLY_TIME_MARGIN = datetime.timedelta(minutes=int(request.args["early_time_margin"]))
     else:
         EARLY_TIME_MARGIN = datetime.timedelta(minutes=40)
+    if "username" in request.args:
+        USERNAME = request.args["username"]
+    else:
+        return "ERROR: no username provided"
+    if "password" in request.args:
+        PASSWORD = request.args["password"]
+    else:
+        return "ERROR: no password provided"
 
     DIR = "to_school"
 
@@ -161,6 +166,14 @@ def api_get_lines_from():
         EARLY_TIME_MARGIN = datetime.timedelta(minutes=int(request.args["early_time_margin"]))
     else:
         EARLY_TIME_MARGIN = datetime.timedelta(minutes=20)
+    if "username" in request.args:
+        USERNAME = request.args["username"]
+    else:
+        return "ERROR: no username provided"
+    if "password" in request.args:
+        PASSWORD = request.args["password"]
+    else:
+        return "ERROR: no password provided"
 
     DIR = "from_school"
 
