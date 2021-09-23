@@ -31,6 +31,8 @@ end_station: int
 date: str, format: %Y-%m-%d (2021-09-21)
 time_margin: int //time between lesson start and bus arrival
 early_time_margin: int //earliest time margin
+username: str //eAsistent username
+password: str //eAsistent password
 ```
 
 ### api_get_lines_from
@@ -48,6 +50,8 @@ date: str, format: %Y-%m-%d (2021-09-21)
 latest_arrival_required: bool ("true", "false")
 latest_arrival: str, format: %H:%M
 early_time_margin: int //time between lessons end and bus departure
+username: str //eAsistent username
+password: str //eAsistent password
 ```
 
 ### api_get_stations
