@@ -5,11 +5,11 @@ import datetime
 from flask import Flask, jsonify, request
 import easistent
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import json
 import timelineutils
 
-load_dotenv()
+#load_dotenv()
 
 """ WEEKDAY_TABLE = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"]
 
@@ -71,7 +71,7 @@ def api_get_lines_to():
 
     DIR = "to_school"
 
-    eAuth = easistent.EasistentAuth(USRNAME, PASSWD)
+    eAuth = easistent.EasistentAuth(USERNAME, PASSWORD)
     access_token, child_id = eAuth.getNewToken()
     eClient = easistent.EasistentClient(access_token, child_id)
 
@@ -177,7 +177,7 @@ def api_get_lines_from():
 
     DIR = "from_school"
 
-    eAuth = easistent.EasistentAuth(USRNAME, PASSWD)
+    eAuth = easistent.EasistentAuth(USERNAME, PASSWORD)
     access_token, child_id = eAuth.getNewToken()
     eClient = easistent.EasistentClient(access_token, child_id)
 
@@ -255,4 +255,5 @@ def api_get_stations():
     stationsJson = misc.serializeStations(stations)
     return stationsJson
 
-app.run()
+if __name__ == "__main__":
+    app.run()

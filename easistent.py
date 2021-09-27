@@ -2,7 +2,6 @@ import requests
 import json
 from bs4 import BeautifulSoup
 import os
-from dotenv import load_dotenv
 
 
 class EasistentAuth():
