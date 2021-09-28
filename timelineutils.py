@@ -52,13 +52,17 @@ class TimeLineUtils():
         schoolHourEvents = schedule["school_hour_events"]
         events = []
         if schedule["events"] != []:
-            events =schedule["events"]
+            events = schedule["events"]
             for event in events:
                 """ event = json.loads(event) """
                 idFrom, idTo = self.getFromAndToId(event["time"])
                 event["time"] = {"from_id": idFrom, "to_id": idTo, "date": event["date"]}
 
                 schoolHourEvents.append(event)
+
+        for event in schoolHourEvents:
+            if event["hour_special_type"] == "cancelled":
+                schoolHourEvents.remove(event)
 
         schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
 
@@ -88,6 +92,10 @@ class TimeLineUtils():
                 event["time"] = {"from_id": idFrom, "to_id": idTo, "date": event["date"]}
 
                 schoolHourEvents.append(event)
+
+        for event in schoolHourEvents:
+            if event["hour_special_type"] == "cancelled":
+                schoolHourEvents.remove(event)
 
         schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
 
