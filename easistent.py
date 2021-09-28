@@ -47,8 +47,7 @@ class EasistentClient():
         }
 
     def getSchedule(self):
-        params = {"from": "2021-09-20", "to": "2021-09-24"}
-        r = self.session.get("https://www.easistent.com/m/timetable/weekly", headers=self.headers, params=params)
+        r = self.session.get("https://www.easistent.com/m/timetable/weekly", headers=self.headers)
         try:
             if json.loads(r.text)["error"]:
                 return "Invalid token/child id"

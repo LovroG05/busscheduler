@@ -62,13 +62,15 @@ class TimeLineUtils():
 
         schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
 
-        hoursOnDate = []
-        for hour in schoolHourEvents:
-            if hour["time"]["date"] == date:
-                hoursOnDate.append(hour)
+        timeList = []
+        for event in schoolHourEvents:
+            tstr = self.TIME_TABLE[event["time"]["from_id"]]["from"]
+            timeList.append(datetime.datetime.strptime(tstr, "%H:%M"))
 
-        startTimeId = hoursOnDate[0]["time"]["from_id"]
-        startTimeStr = self.TIME_TABLE[startTimeId]["from"]
+        startTime = min(timeList)
+        startTimeStr = startTime.strftime("%H:%M")
+
+        print(f"startTimeStr: {startTimeStr}")
 
         return startTimeStr
 
@@ -89,14 +91,14 @@ class TimeLineUtils():
 
         schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
 
-        hoursOnDate = []
-        for hour in schoolHourEvents:
-            if hour["time"]["date"] == date:
-                hoursOnDate.append(hour)
 
-        endTimeId = hoursOnDate[-1]["time"]["to_id"]
-        print(f"endTimeId: {endTimeId}")
-        endTimeStr = self.TIME_TABLE[endTimeId]["to"]
+        timeList = []
+        for event in schoolHourEvents:
+            tstr = self.TIME_TABLE[event["time"]["to_id"]]["to"]
+            timeList.append(datetime.datetime.strptime(tstr, "%H:%M"))
+
+        endTime = max(timeList)
+        endTimeStr = endTime.strftime("%H:%M")
         print(f"endTimeStr: {endTimeStr}")
 
         return endTimeStr
