@@ -78,9 +78,13 @@ def api_get_lines_to():
     timeLineUtils = timelineutils.TimeLineUtils()
 
     LATEST_ARRIVAL_TIME_OBJ = timeLineUtils.getLatestArrival(DATE, DIR, TIME_MARGIN, eClient)
+    if LATEST_ARRIVAL_TIME_OBJ == "":
+        return {"error": "no lessons/non all day events", "lines": "{}"}
     LATEST_ARRIVAL_TIME = LATEST_ARRIVAL_TIME_OBJ.strftime("%H:%M")
     
     EARLY_ARRIVAL_TIME_OBJ = timeLineUtils.getEarlyArrival(DATE, DIR, EARLY_TIME_MARGIN, eClient)
+    if EARLY_ARRIVAL_TIME_OBJ == "":
+        return {"error": "no lessons/non all day events", "lines": "{}"}
     EARLY_ARRIVAL_TIME = EARLY_ARRIVAL_TIME_OBJ.strftime("%H:%M")
 
     Bus = BusGetter(START_STATION_ID, END_STATION_ID, DATE)
@@ -189,6 +193,8 @@ def api_get_lines_from():
         LATEST_ARRIVAL_TIME_OBJ = datetime.datetime.strptime(LATEST_ARRIVAL_TIME, "%Y-%m-%d %H:%M:%S")
     
     EARLY_START_TIME_OBJ = timeLineUtils.getEarlyStartTime(DATE, EARLY_TIME_MARGIN, eClient)
+    if EARLY_START_TIME_OBJ == "":
+        return {"error": "no lessons/non all day events", "lines": "{}"}
     EARLY_START_TIME = EARLY_START_TIME_OBJ.strftime("%H:%M")
 
     Bus = BusGetter(START_STATION_ID, END_STATION_ID, DATE)

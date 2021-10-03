@@ -46,9 +46,13 @@ class EasistentClient():
 			"x-requested-with": "XMLHttpRequest"
         }
 
-    def getSchedule(self, mon, fri):
-        data = {"from": mon, "to": fri}
-        r = self.session.get("https://www.easistent.com/m/timetable/weekly", headers=self.headers, data=data)
+    def getSchedule(self, mon, sun):
+        mon = mon.strftime("%Y-%m-%d")
+        sun = sun.strftime("%Y-%m-%d")
+        print(f"monday: {mon}")
+        print(f"sunday: {sun}")
+        rurl = f"https://www.easistent.com/m/timetable/weekly?from={mon}&to={sun}"
+        r = self.session.get(rurl, headers=self.headers)
         try:
             if json.loads(r.text)["error"]:
                 return "Invalid token/child id"

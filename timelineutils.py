@@ -46,7 +46,7 @@ class TimeLineUtils():
 
         return from_id, to_id
 
-    def getMonFri(self, date):
+    def getMonSun(self, date):
         # returns mon-fri from date
         theday = datetime.datetime.strptime(date, "%Y-%m-%d")
         weekday = theday.isoweekday()
@@ -54,15 +54,19 @@ class TimeLineUtils():
         dates = [start + datetime.timedelta(days=d) for d in range(7)]
 
         monday = dates[1]
-        friday = dates[5]
+        sunday = dates[-1] + datetime.timedelta(days=1) 
+        print(f"monday: {monday}")
+        print(f"sunday: {sunday}")
 
-        return monday, friday
+        return monday, sunday
         
 
     def getStartTime(self, date, eClient):
         # returns start time of school from TIME_TABLE
-        monday, friday = self.getMonFri(date)
-        schedule = eClient.getSchedule(monday, friday)
+        monday, sunday = self.getMonSun(date)
+        schedule = eClient.getSchedule(monday, sunday)
+
+        # print(f"schedule: {schedule}")
 
         schoolHourEvents = schedule["school_hour_events"]
         events = []
@@ -79,12 +83,23 @@ class TimeLineUtils():
             if event["hour_special_type"] == "cancelled":
                 schoolHourEvents.remove(event)
 
-        schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
+        actualEventHours = []
+        for event in schoolHourEvents:
+            print(f"eventDate: {event['time']['date']}")
+            print(f"date: {date}")
+            if event["time"]["date"] == date:
+                actualEventHours.append(event)
+
+        print(f"actualEventHours: {actualEventHours}")
+        actualEventHours.sort(key=lambda x: x["time"]["from_id"])
 
         timeList = []
-        for event in schoolHourEvents:
+        for event in actualEventHours:
             tstr = self.TIME_TABLE[event["time"]["from_id"]]["from"]
             timeList.append(datetime.datetime.strptime(tstr, "%H:%M"))
+
+        if len(timeList) == 0:
+            return ""
 
         startTime = min(timeList)
         startTimeStr = startTime.strftime("%H:%M")
@@ -95,8 +110,8 @@ class TimeLineUtils():
 
     def getEndTime(self, date, eClient):
         # returns end time of school from TIME_TABLE
-        monday, friday = self.getMonFri(date)
-        schedule = eClient.getSchedule(monday, friday)
+        monday, sunday = self.getMonSun(date)
+        schedule = eClient.getSchedule(monday, sunday)
 
         schoolHourEvents = schedule["school_hour_events"]
         events = []
@@ -113,13 +128,24 @@ class TimeLineUtils():
             if event["hour_special_type"] == "cancelled":
                 schoolHourEvents.remove(event)
 
-        schoolHourEvents.sort(key=lambda x: x["time"]["from_id"])
+        actualEventHours = []
+        for event in schoolHourEvents:
+            print(f"eventDate: {event['time']['date']}")
+            print(f"date: {date}")
+            if event["time"]["date"] == date:
+                actualEventHours.append(event)
+
+        print(f"actualEventHours: {actualEventHours}")
+        actualEventHours.sort(key=lambda x: x["time"]["from_id"])
 
 
         timeList = []
-        for event in schoolHourEvents:
+        for event in actualEventHours:
             tstr = self.TIME_TABLE[event["time"]["to_id"]]["to"]
             timeList.append(datetime.datetime.strptime(tstr, "%H:%M"))
+
+        if len(timeList) == 0:
+            return ""
 
         endTime = max(timeList)
         endTimeStr = endTime.strftime("%H:%M")
@@ -134,6 +160,9 @@ class TimeLineUtils():
             timeStr = self.getEndTime(date, eClient)
         else:
             return "ERROR invalid direction"
+
+        if timeStr == "":
+            return ""
 
         print(f"starting/finish time: {timeStr}")
         todayStr = date
@@ -154,6 +183,9 @@ class TimeLineUtils():
         else:
             return "ERROR invalid direction"
 
+        if timeStr == "":
+            return ""
+
         todayStr = date
         tStr = todayStr + " " + timeStr + ":00"
         startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
@@ -161,6 +193,8 @@ class TimeLineUtils():
 
     def getEarlyArrival(self, date, dir, timeMargin, eClient):
         startTime = self.getArrivalTimeNoMargin(date, dir, eClient)
+        if startTime == "":
+            return ""
         if dir == "to_school":
             startTime = startTime - timeMargin
         elif dir == "from_school":
@@ -170,8 +204,10 @@ class TimeLineUtils():
 
     def getEarlyStartTime(self, date, early_time_margin, eClient):
         timeStr = self.getEndTime(date, eClient)
+        if timeStr == "":
+            return ""
         todayStr = date
-        tStr = todayStr + " " + timeStr + ":00"
-        startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
+        tStr = todayStr + " " + timeStr
+        startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M")
         startTime = startTime + early_time_margin
         return startTime
