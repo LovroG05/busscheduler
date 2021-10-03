@@ -35,6 +35,15 @@ username: str //eAsistent username
 password: str //eAsistent password
 ```
 
+RESPONSE:
+```json
+{"lines": "json of lines"}
+```
+in case of error:
+```json
+{"lines": "{}", "error": "error explanation"}
+```
+
 ### api_get_lines_from
 http GET request for getting bus lines for going FROM school
 
@@ -52,6 +61,14 @@ latest_arrival: str, format: %H:%M
 early_time_margin: int //time between lessons end and bus departure
 username: str //eAsistent username
 password: str //eAsistent password
+```
+RESPONSE:
+```json
+{"lines": "json of lines"}
+```
+in case of error:
+```json
+{"lines": "{}", "error": "error explanation"}
 ```
 
 ### api_get_stations
