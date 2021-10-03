@@ -17,6 +17,7 @@ Jinja2 = "==3.0.1"
 MarkupSafe = "==2.0.1"
 Werkzeug = "==2.0.1"
 beautifulsoup4 = "*"
+workdays = "*"
 
 [dev-packages]
 

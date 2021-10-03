@@ -2,6 +2,7 @@ import time
 import datetime
 import easistent
 import busgetter
+import workdays
 
 
 class TimeLineUtils():
@@ -45,9 +46,23 @@ class TimeLineUtils():
 
         return from_id, to_id
 
+    def getMonFri(self, date):
+        # returns mon-fri from date
+        theday = datetime.datetime.strptime(date, "%Y-%m-%d")
+        weekday = theday.isoweekday()
+        start = theday - datetime.timedelta(days=weekday)
+        dates = [start + datetime.timedelta(days=d) for d in range(7)]
+
+        monday = dates[1]
+        friday = dates[5]
+
+        return monday, friday
+        
+
     def getStartTime(self, date, eClient):
         # returns start time of school from TIME_TABLE
-        schedule = eClient.getSchedule()
+        monday, friday = self.getMonFri(date)
+        schedule = eClient.getSchedule(monday, friday)
 
         schoolHourEvents = schedule["school_hour_events"]
         events = []
@@ -80,7 +95,8 @@ class TimeLineUtils():
 
     def getEndTime(self, date, eClient):
         # returns end time of school from TIME_TABLE
-        schedule = eClient.getSchedule()
+        monday, friday = self.getMonFri(date)
+        schedule = eClient.getSchedule(monday, friday)
 
         schoolHourEvents = schedule["school_hour_events"]
         events = []
