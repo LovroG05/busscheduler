@@ -258,8 +258,7 @@ def api_get_lines_from():
 def api_get_stations():
     misc = Misc()
     stations = misc.getBusStations()
-    stationsJson = misc.serializeStations(stations)
-    return stationsJson
+    return stations
 
 if __name__ == "__main__":
     app.run(debug=True)

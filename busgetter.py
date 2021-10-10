@@ -66,12 +66,13 @@ class Misc():
     def getBusStations(self):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_postajalisca_vsa_v2.php"
         response = req.get(url)
-        text = response.text
+        text = str(response.text)
+        print("text: " + text)
         stations = text.split("\n")
         serializedStations = self.serializeBusStations(stations)
         return serializedStations
 
-    def serializeStations(self, stations):
+    """ def serializeStations(self, stations):
         serializedStations = []
         lines = stations.split("\n")
         for line in lines:
@@ -80,7 +81,7 @@ class Misc():
             line_name = line[1]
             serializedStations.append({"lineId": line_id, "lineName": line_name})
 
-        return jsonify(serializedStations)
+        return jsonify(serializedStations) """
         
 
 
