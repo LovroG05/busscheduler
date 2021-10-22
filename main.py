@@ -7,6 +7,7 @@ import easistent
 import os
 import json
 import timelineutils
+import threading
 
 
 app = Flask(__name__)
@@ -100,11 +101,21 @@ def api_get_lines_to():
         if seconds > 0:
             validStartLinesList3.append(i)
 
+    thread_list = []
+    for i in validStartLinesList1:
+        thread = threading.Thread(target=i.postLineData)
+        thread_list.append(thread)
+
+    for thread in thread_list:
+        thread.start()
+
+    for thread in thread_list:
+        thread.join()
 
     # serialize lines to json
     serializedLines = []
     for i in validStartLinesList3:
-        i.postLineData()
+        print("line ping: " + str(i.getPing()))
         serializedLines.append(i.serialize())
 
     return jsonify({"lines": serializedLines})
@@ -188,6 +199,17 @@ def api_get_lines_from():
         if seconds > 0:
             validStartLinesList1.append(i)
 
+    thread_list = []
+    for i in validStartLinesList1:
+        thread = threading.Thread(target=i.postLineData)
+        thread_list.append(thread)
+
+    for thread in thread_list:
+        thread.start()
+
+    for thread in thread_list:
+        thread.join()
+
     # get lines that arrive in time if required TODO
     if LATEST_ARRIVAL_REQUIRED:
         validStartLinesList2 = []
@@ -202,7 +224,7 @@ def api_get_lines_from():
         # serialize lines to json
         serializedLines = []
         for i in validStartLinesList2:
-            i.postLineData()
+            print("line ping: " + str(i.getPing()))
             serializedLines.append(i.serialize())
 
         return jsonify({"lines": serializedLines})
@@ -211,7 +233,7 @@ def api_get_lines_from():
         # serialize lines to json
         serializedLines = []
         for i in validStartLinesList1:
-            i.postLineData()
+            print("line ping: " + str(i.getPing()))
             serializedLines.append(i.serialize())
 
         return jsonify({"lines": serializedLines})

@@ -28,14 +28,14 @@ class Line(object):
             return lineData
 
     def postLineData(self):
+        start_time = time.thread_time()
         url = "https://www.ap-ljubljana.si/_vozni_red/get_linija_info_0.php"
         obj = {"flags": self.curateLineData(self.vozniRed)}
-        start_time = time.time()
         response = req.post(url, data=obj)
-        end_time = time.time()
+        self.lineInfo = response.text
+        end_time = time.thread_time()
         ping_time = end_time - start_time
         self.ping = ping_time
-        self.lineInfo = response.text
 
     def getTime(self, _time):
         obj = time.strptime(_time, "%Y-%m-%d %H:%M:%S")
