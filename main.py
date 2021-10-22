@@ -5,33 +5,8 @@ import datetime
 from flask import Flask, jsonify, request
 import easistent
 import os
-#from dotenv import load_dotenv
 import json
 import timelineutils
-
-#load_dotenv()
-
-""" WEEKDAY_TABLE = ["Pon", "Tor", "Sre", "Čet", "Pet", "Sob", "Ned"]
-
-HOUR_ID_TABLE = {
-    1: 241008, 
-    2: 241026, 
-    3: 241029, 
-    4: 241032, 
-    "malca1": 241147, 
-    5: 241035, 
-    6: 241038, 
-    7: 241041, 
-    8: 241044, 
-    "malca2": 241047, 
-    9: 241247, 
-    10: 241011, 
-    11: 241014, 
-    12: 241017, 
-    13: 241020, 
-    14: 241023
-}
- """
 
 
 app = Flask(__name__)
