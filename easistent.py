@@ -2,6 +2,7 @@ import requests
 import json
 from bs4 import BeautifulSoup
 import os
+import time
 
 
 class EasistentAuth():
@@ -12,14 +13,19 @@ class EasistentAuth():
     def getNewToken(self):
         loginData = {"uporabnik": self.username, "geslo": self.password}
         s = requests.Session()
-
+        start_time = time.time()
         login = s.post("https://www.easistent.com/p/ajax_prijava", data = loginData)
+        end_time = time.time()
+        print("getNewToken login time: " + str(end_time - start_time))
 
         if json.loads(login.text)["status"] != "ok":
             return "Napačno uporabniško ime ali geslo! Poskusite znova!", ""
 
         else:
+            start_time = time.time()
             src = s.get("https://www.easistent.com").text
+            end_time = time.time()
+            print("getNewToken src time: " + str(end_time - start_time))
             soup = BeautifulSoup(src, "html.parser")
 
             access_token = soup.find("meta", attrs = {"name": "access-token"})
@@ -49,10 +55,13 @@ class EasistentClient():
     def getSchedule(self, mon, sun):
         mon = mon.strftime("%Y-%m-%d")
         sun = sun.strftime("%Y-%m-%d")
-        print(f"monday: {mon}")
-        print(f"sunday: {sun}")
+        #print(f"monday: {mon}")
+        #print(f"sunday: {sun}")
+        start_time = time.time()
         rurl = f"https://www.easistent.com/m/timetable/weekly?from={mon}&to={sun}"
         r = self.session.get(rurl, headers=self.headers)
+        end_time = time.time()
+        print("getSchedule time: " + str(end_time - start_time))
         try:
             if json.loads(r.text)["error"]:
                 return "Invalid token/child id"

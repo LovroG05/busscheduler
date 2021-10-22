@@ -7,20 +7,35 @@ class Line(object):
     def __init__(self, vozniRed):
         self.vozniRed = vozniRed
         self.startTime, self.arrivalTime = self.makeTimeData(self.vozniRed)
-        self.lineInfo = self.__postLineData(self.__curateLineData(self.vozniRed))
+        self.ping = 0
+        self.lineInfo = ""
+        #self.lineInfo = self.__postLineData(self.__curateLineData(self.vozniRed))
 
-    def __curateLineData(self, line):
+    def getPing(self):
+        return self.ping
+        
+    def getStartTime(self):
+        return self.startTime
+
+    def getArrivalTime(self):
+        return self.arrivalTime
+
+    def curateLineData(self, line):
         data = line.split("|")
         lineData = data[-1]
 
         if lineData != "":
             return lineData
 
-    def __postLineData(self, lineData):
+    def postLineData(self):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_linija_info_0.php"
-        obj = {"flags": lineData}
+        obj = {"flags": self.curateLineData(self.vozniRed)}
+        start_time = time.time()
         response = req.post(url, data=obj)
-        return response.text
+        end_time = time.time()
+        ping_time = end_time - start_time
+        self.ping = ping_time
+        self.lineInfo = response.text
 
     def getTime(self, _time):
         obj = time.strptime(_time, "%Y-%m-%d %H:%M:%S")
@@ -32,12 +47,6 @@ class Line(object):
         startTime = self.getTime(dataList[6])
         arrivalTime = self.getTime(dataList[7])
         return startTime, arrivalTime
-
-    def getStartTime(self):
-        return self.startTime
-    
-    def getArrivalTime(self):
-        return self.arrivalTime
 
     def serialize(self):
         return {
@@ -65,23 +74,15 @@ class Misc():
 
     def getBusStations(self):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_postajalisca_vsa_v2.php"
+        start_time = time.time()
         response = req.get(url)
+        end_time = time.time()
+        print("getBusStations ping time: " + str(end_time - start_time))
         text = str(response.text)
-        print("text: " + text)
+        #print("text: " + text)
         stations = text.split("\n")
         serializedStations = self.serializeBusStations(stations)
         return serializedStations
-
-    """ def serializeStations(self, stations):
-        serializedStations = []
-        lines = stations.split("\n")
-        for line in lines:
-            line = line.split("|")
-            line_id = line[0].split(":")[1]
-            line_name = line[1]
-            serializedStations.append({"lineId": line_id, "lineName": line_name})
-
-        return jsonify(serializedStations) """
         
 
 
@@ -93,5 +94,8 @@ class BusGetter():
 
     def getVozniRed(self):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_vozni_red_0.php?VSTOP_ID=" + str(self.vstopId) + "&IZSTOP_ID=" + str(self.izstopId) + "&DATUM=" + str(self.date)
+        start_time = time.time()
         response = req.get(url)
+        end_time = time.time()
+        print("getVozniRed ping time: " + str(end_time - start_time))
         return response.text

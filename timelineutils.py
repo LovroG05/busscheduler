@@ -55,8 +55,8 @@ class TimeLineUtils():
 
         monday = dates[1]
         sunday = dates[-1] + datetime.timedelta(days=1) 
-        print(f"monday: {monday}")
-        print(f"sunday: {sunday}")
+        #print(f"monday: {monday}")
+        #print(f"sunday: {sunday}")
 
         return monday, sunday
         
@@ -85,12 +85,12 @@ class TimeLineUtils():
 
         actualEventHours = []
         for event in schoolHourEvents:
-            print(f"eventDate: {event['time']['date']}")
-            print(f"date: {date}")
+            #print(f"eventDate: {event['time']['date']}")
+            #print(f"date: {date}")
             if event["time"]["date"] == date:
                 actualEventHours.append(event)
 
-        print(f"actualEventHours: {actualEventHours}")
+        #print(f"actualEventHours: {actualEventHours}")
         actualEventHours.sort(key=lambda x: x["time"]["from_id"])
 
         timeList = []
@@ -130,12 +130,12 @@ class TimeLineUtils():
 
         actualEventHours = []
         for event in schoolHourEvents:
-            print(f"eventDate: {event['time']['date']}")
-            print(f"date: {date}")
+            #print(f"eventDate: {event['time']['date']}")
+            #print(f"date: {date}")
             if event["time"]["date"] == date:
                 actualEventHours.append(event)
 
-        print(f"actualEventHours: {actualEventHours}")
+        #print(f"actualEventHours: {actualEventHours}")
         actualEventHours.sort(key=lambda x: x["time"]["from_id"])
 
 
@@ -149,7 +149,7 @@ class TimeLineUtils():
 
         endTime = max(timeList)
         endTimeStr = endTime.strftime("%H:%M")
-        print(f"endTimeStr: {endTimeStr}")
+        #print(f"endTimeStr: {endTimeStr}")
 
         return endTimeStr
 
@@ -164,7 +164,7 @@ class TimeLineUtils():
         if timeStr == "":
             return ""
 
-        print(f"starting/finish time: {timeStr}")
+        #print(f"starting/finish time: {timeStr}")
         todayStr = date
         tStr = todayStr + " " + timeStr + ":00"
         startTime = datetime.datetime.strptime(tStr, "%Y-%m-%d %H:%M:%S")
@@ -172,7 +172,7 @@ class TimeLineUtils():
             startTime = startTime - timeMargin
         elif dir == "from_school":
             startTime = startTime + timeMargin
-        print(f"latest arrival time: {startTime}")
+        #print(f"latest arrival time: {startTime}")
         return startTime 
 
     def getArrivalTimeNoMargin(self, date, dir, eClient):
@@ -199,7 +199,7 @@ class TimeLineUtils():
             startTime = startTime - timeMargin
         elif dir == "from_school":
             startTime = startTime + timeMargin
-        print(f"earliest arrival time: %s" % startTime.strftime("%Y-%m-%d %H:%M:%S"))
+        #print(f"earliest arrival time: %s" % startTime.strftime("%Y-%m-%d %H:%M:%S"))
         return startTime
 
     def getEarlyStartTime(self, date, early_time_margin, eClient):

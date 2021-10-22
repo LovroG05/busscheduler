@@ -101,15 +101,10 @@ def api_get_lines_to():
             validStartLinesList3.append(i)
 
 
-
-    print("\nVALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME)
-    for line in validStartLinesList3:
-        print(f"LINE START: %s\nLINE END: %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", line.getStartTime()), time.strftime("%Y-%m-%d %H:%M:%S", line.getArrivalTime())))
-    
-
     # serialize lines to json
     serializedLines = []
     for i in validStartLinesList3:
+        i.postLineData()
         serializedLines.append(i.serialize())
 
     return jsonify({"lines": serializedLines})
@@ -185,7 +180,7 @@ def api_get_lines_from():
     
     # get lines that wont have passed
     validStartLinesList1 = []
-    print(f"early start time: {EARLY_START_TIME}")
+    #print(f"early start time: {EARLY_START_TIME}")
     for i in linesList:
         lineDepartureTime = time.mktime(i.getStartTime())
         earlyStartTime = time.mktime(EARLY_START_TIME_OBJ.timetuple())
@@ -203,28 +198,20 @@ def api_get_lines_from():
             if seconds > 0:
                 validStartLinesList2.append(i)
 
-        print("\nVALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME)
-        for line in validStartLinesList2:
-            print(f"LINE START: %s\nLINE END: %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", line.getStartTime()), time.strftime("%Y-%m-%d %H:%M:%S", line.getArrivalTime())))
-        
 
         # serialize lines to json
         serializedLines = []
         for i in validStartLinesList2:
+            i.postLineData()
             serializedLines.append(i.serialize())
 
         return jsonify({"lines": serializedLines})
 
     else:
-        """ print("\nVALID LINES TO ARRIVE BEFORE %s:" % LATEST_ARRIVAL_TIME) """
-        print("\n VALID LINES:")
-        for line in validStartLinesList1:
-            print(f"LINE START: %s\nLINE END: %s\n" % (time.strftime("%Y-%m-%d %H:%M:%S", line.getStartTime()), time.strftime("%Y-%m-%d %H:%M:%S", line.getArrivalTime())))
-        
-
         # serialize lines to json
         serializedLines = []
         for i in validStartLinesList1:
+            i.postLineData()
             serializedLines.append(i.serialize())
 
         return jsonify({"lines": serializedLines})
@@ -234,6 +221,10 @@ def api_get_stations():
     misc = Misc()
     stations = misc.getBusStations()
     return stations
+
+@app.route("/api/v2/benchmark", methods=["GET"])
+def api_benchmark():
+    return {"time_received": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
 if __name__ == "__main__":
     app.run(debug=True)
