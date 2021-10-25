@@ -121,7 +121,7 @@ def api_get_lines_to():
     return jsonify({"lines": serializedLines})
 
 # http GET request for bus lines coming FROM school
-# args: start_station, end_station, date, latest_arrival_required, latest_arrival, early_time_margin
+# args: start_station, end_station, date, early_time_margin
 @app.route("/api/v1/getlinesfromschool", methods=["GET"])
 def api_get_lines_from():
     if "start_station" in request.args:
@@ -136,17 +136,6 @@ def api_get_lines_from():
         DATE = request.args["date"]
     else:
         DATE = datetime.datetime.now().strftime("%Y-%m-%d")
-    if "latest_arrival_required" in request.args:
-        if request.args["latest_arrival_required"] == "true":
-            LATEST_ARRIVAL_REQUIRED = True
-            if "latest_arrival" in request.args:
-                LATEST_ARRIVAL_TIME = request.args["latest_arrival"]
-            else:
-                return "ERROR: no latest_arrival provided yet latest_arrival_required is 'true'"
-        else:
-            LATEAST_ARRIVAL_REQUIRED = False
-    else:
-        LATEST_ARRIVAL_REQUIRED = False
     if "early_time_margin" in request.args:
         EARLY_TIME_MARGIN = datetime.timedelta(minutes=int(request.args["early_time_margin"]))
     else:

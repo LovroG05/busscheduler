@@ -62,24 +62,23 @@ class Misc():
         for station in stations:
             if station != "":
                 station = station.split(":")
-                station = station[1]
-                station = station.split("|")
-                station_id = station[0]
-                station_name = station[1]
-                station_obj = {"lineId": station_id, "lineName": station_name}
-                serializedStations.append(station_obj)
+                if station[0] == "0":
+                    station = station[1]
+                    station = station.split("|")
+                    station_id = station[0]
+                    station_name = station[1]
+                    if station_id != "":
+                        if station_name != "":
+                            station_obj = {"lineId": station_id, "lineName": station_name}
+                            serializedStations.append(station_obj)
 
         return jsonify(serializedStations)
 
 
     def getBusStations(self):
         url = "https://www.ap-ljubljana.si/_vozni_red/get_postajalisca_vsa_v2.php"
-        start_time = time.time()
         response = req.get(url)
-        end_time = time.time()
-        print("getBusStations ping time: " + str(end_time - start_time))
         text = str(response.text)
-        #print("text: " + text)
         stations = text.split("\n")
         serializedStations = self.serializeBusStations(stations)
         return serializedStations
