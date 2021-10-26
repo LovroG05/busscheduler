@@ -156,11 +156,6 @@ def api_get_lines_from():
     eClient = easistent.EasistentClient(access_token, child_id)
 
     timeLineUtils = timelineutils.TimeLineUtils()
-
-    if LATEST_ARRIVAL_REQUIRED:
-        LATEST_ARRIVAL_TIME = DATE + " " + LATEST_ARRIVAL_TIME + ":00"
-
-        LATEST_ARRIVAL_TIME_OBJ = datetime.datetime.strptime(LATEST_ARRIVAL_TIME, "%Y-%m-%d %H:%M:%S")
     
     EARLY_START_TIME_OBJ = timeLineUtils.getEarlyStartTime(DATE, EARLY_TIME_MARGIN, eClient)
     if EARLY_START_TIME_OBJ == "":
@@ -199,31 +194,12 @@ def api_get_lines_from():
     for thread in thread_list:
         thread.join()
 
-    # get lines that arrive in time if required TODO
-    if LATEST_ARRIVAL_REQUIRED:
-        validStartLinesList2 = []
-        for i in validStartLinesList1:
-            arrivalTime = time.mktime(i.getArrivalTime())
-            latestArrival = time.mktime(LATEST_ARRIVAL_TIME_OBJ.timetuple())
-            seconds = latestArrival - arrivalTime
-            if seconds > 0:
-                validStartLinesList2.append(i)
 
-
-        # serialize lines to json
-        serializedLines = []
-        for i in validStartLinesList2:
-            print("line ping: " + str(i.getPing()))
-            serializedLines.append(i.serialize())
-
-        return jsonify({"lines": serializedLines})
-
-    else:
-        # serialize lines to json
-        serializedLines = []
-        for i in validStartLinesList1:
-            print("line ping: " + str(i.getPing()))
-            serializedLines.append(i.serialize())
+    # serialize lines to json
+    serializedLines = []
+    for i in validStartLinesList1:
+        print("line ping: " + str(i.getPing()))
+        serializedLines.append(i.serialize())
 
         return jsonify({"lines": serializedLines})
 
